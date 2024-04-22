@@ -5,6 +5,8 @@ Python - Variable Annotations
 from typing import List, Union
 
 
-def sum_mixed_list(mxd_lst: list[union[int, float]]) -> float:
-    '''list of integers and floats and returns their sum'''
+def sum_mixed_list(mxd_lst: List[Union[int, float]]) -> float:
+    '''
+    list of integers and floats and returns their sum
+    '''
     return sum(mxd_lst)
