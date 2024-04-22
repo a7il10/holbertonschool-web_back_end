@@ -2,7 +2,7 @@
 '''
 Python - Variable Annotations
 '''
-from typing import list, Union
+from typing import List, Union
 
 
 def sum_mixed_list(mxd_lst: list[union[int, float]]) -> float:
