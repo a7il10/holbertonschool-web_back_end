@@ -2,12 +2,14 @@
 '''
 Python - Variable Annotations
 '''
-from typing import List, Tuple
+from typing import Iterable, Sequence, List, Tuple
 
 
-def element_length(lst: List[str]) -> List[Tuple[str, int]]:
-    """
-    This function takes a list of strings and returns a list of tuples.
-    """
-
+def element_length(lst: Iterable[Sequence]) -> List[Tuple[Sequence, int]]:
+    '''
+    Annotate the below functions parameters and return values
+    with the appropriate types
+    def element_length(lst):
+    return [(i, len(i)) for i in lst]
+    '''
     return [(i, len(i)) for i in lst]
