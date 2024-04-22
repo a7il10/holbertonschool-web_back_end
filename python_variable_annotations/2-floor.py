@@ -2,9 +2,12 @@
 '''
 Python - Variable Annotations
 '''
+import math
 
 
 def floor(n: float) -> int:
-    '''returns the floor of the float'''
-    floor_value = math.floor(n)
-    return floor_value
+    '''
+    function which takes a float n as argument
+    and returns the floor of the float
+    '''
+    return math.floor(n)
