@@ -1,2 +1,2 @@
 // lists all documents in the collection school
-db.school.find(name: /^Holberton/) | mongo
+db.school.find({ "name": { "$regex": "^Holberton", "$options": "i" } })
