@@ -1,13 +1,2 @@
- // Script to list documents with name starting by Holberton in the school collection
-
-// Check if database name is passed as an argument
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <database_name>"
-    exit 1
-fi
-
-# Database name
-DB_NAME=$1
-
-# Run mongo command
-mongo $DB_NAME --eval 'db.school.find({name: /^Holberton/}).pretty()'
+// lists all documents in the collection school
+db.school.find({name:"Holberton"})
