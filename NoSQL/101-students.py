@@ -3,21 +3,25 @@
 NoSQL
 '''
 
+from operator import itemgetter
 
-from pymongo import MongoClient
 
 def top_students(mongo_collection):
-    """
-    script that provides stats about Nginx logs stored in MongoDB
-    """
+    '''
+    function that inserts a new document in a collection based on kwargs
+    '''
     students = mongo_collection.find()
-    for student in students:
-        total = 0
-        count = 0
-        for score in student['scores']:
-            total += score['score']
-            count += 1
-        student['averageScore'] = total / count
+    student_scores = []
 
-    sorted_students = sorted(list(students), key=lambda student: student['averageScore'], reverse=True)
-    return sorted_students
+    for student in students:
+
+        total_score = 0
+        for course in student['scores']:
+            total_score += course['score']
+        average_score = total_score / len(student['scores'])
+        student_scores.append({'_id': student['_id'], 'name': student['name'], 'averageScore': average_score})
+
+    # Sort students by average score in descending order
+    student_scores.sort(key=itemgetter('averageScore'), reverse=True)
+
+    return student_scores
