@@ -4,22 +4,26 @@ NoSQL
 '''
 from pymongo import MongoClient
 
-# Connect to MongoDB
-client = MongoClient('your_mongodb_uri')
-db = client['logs']
-collection = db['nginx']
 
-# Get total number of logs
-total_logs = collection.count_documents({})
-print(f"{total_logs} logs")
+method = ["GET", "POST", "PUT", "PATCH", "DELETE"]
 
-# Get count each method
-methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
-print("Methods:")
-for method in methods:
-    count = collection.count_documents({"method": method})
-    print(f"\t{method}: {count}")
 
-# Get count of documents with method=GET and path=/status
-count_status = collection.count_documents({"method": "GET", "path": "/status"})
-print(f"GET /status: {count_status}")
+def nginx_logs_stats(mongo_collection):
+    """
+    script that provides stats about Nginx logs stored in MongoDB
+    """
+    total_logs = mongo_collection.count_documents({})
+    print(f"{total_logs} logs")
+    print("Methods:")
+    for x in method:
+        method_count = mongo_collection.count_documents({"method": x})
+        print(f"\tmethod {x.upper()}: {method_count}")
+    status_check = mongo_collection.count_documents(
+        {"method": "GET", "path": "/status"}
+    )
+    print(f"{status_check} status check")
+
+
+if __name__ == "__main__":
+    nginx_collection = MongoClient('mongodb://127.0.0.1:27017').logs.nginx
+    nginx_logs_stats(nginx_collection)
